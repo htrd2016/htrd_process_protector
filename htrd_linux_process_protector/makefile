@@ -1,0 +1,11 @@
+CC=gcc
+CFLAGS=-g -Wall -O2
+LDFLAGS=-L/usr/lib/
+TARGET_HTRD_MINION_PROTECTOR = htrdMinionProtector
+all:$(TARGET_HTRD_MINION_PROTECTOR)
+
+$(TARGET_HTRD_MINION_PROTECTOR):
+	$(CC) -o $@ $(INCLUDES) $(CFLAGS) main.c $(LIBS)
+
+clean:
+	rm  -f *.o $(TARGET_HTRD_MINION_PROTECTOR)
