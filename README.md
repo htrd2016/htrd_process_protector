@@ -1,6 +1,7 @@
 # htrd_process_protector
 
-简介：该项目的目的是为了检测salt-minion超时不执行master，实现机制：master上会定时发命令在minion上执行写文件命令，监控进程发现该文件超时未修改文件就去重启服务。
+    简介：该项目的目的是为了检测salt-minion超时不执行master，实现机制：master上会定时发命令在minion上执行写文件命令，
+    监控进程发现该文件超时未修改文件就去重启服务。
 
 （1）文件夹htrd_linux_process_protector 是linux上运行的守护程序工程。
      不同系统需要重编译一次，在测试过程中生成的文件需要重命名，目前命名规则是redhat5.8为htrdMinionProtector-el5，centos7为htrdMinionProtector-el7，
@@ -14,17 +15,18 @@
       
 （3）文件夹salt_master_shell里面是需要在salt-master上执行的脚本
 
-    1、copy_exe_to_salt_base.sh：是将生成的可执行程序拷贝到salt的文件服务器目录以便下发文件使用
+   1、copy_exe_to_salt_base.sh：是将生成的可执行程序拷贝到salt的文件服务器目录以便下发文件使用
     （前提是将linux和windows生成的可执行程序放到minion_protector目录下，其中系统redhat5.8的可执行文件名为htrdMinionProtector-el5，
     Centos7的可执行程序名为htrdMinionProtector-el7，windows下的可执行程序名为htrdMinionProtector.exe）。
     
-    2、send_protector_to_minions.sh：是通过salt-master将文件下发到minion上（如果是linux系统，需要通过chmod +x 赋予可执行权限），
+   2、send_protector_to_minions.sh：是通过salt-master将文件下发到minion上（如果是linux系统，需要通过chmod +x 赋予可执行权限），
       目前只在redhat5.8和windows2003上做了测试。
       
-    3、write_alived.sh：是需要在salt-master所在的系统上设置定时任务调用的脚本（测试的时候定时任务为1分钟一次），
-       该脚本用于定时给minion发写指定文件的命令，以便守护进程判断minion是否还活着，如果守护进程发现该文件超时未被修改，会通过命令重启minion服务。
+   3、write_alived.sh：是需要在salt-master所在的系统上设置定时任务调用的脚本（测试的时候定时任务为1分钟一次），
+       该脚本用于定时给minion发写指定文件的命令，以便守护进程判断minion是否还活着，如果守护进程发现该文件超时未被修改，
+       会通过命令重启minion服务。
        
-    4、run_monion_protecter.sh：是通过salt-master将守护进程启动起来。
+   4、run_monion_protecter.sh：是通过salt-master将守护进程启动起来。
     
     
 -------------------------------------------------------------------------------------------
