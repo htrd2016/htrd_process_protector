@@ -29,15 +29,19 @@
              windows2003的ip地址10.10.250.230。
 
 在redhat5.8上的已经做的测试步骤：
+
    1.master启动定时器执行write_alived，在master上手动运行run_monion_protecter.sh执行守护进程，
      通过top命令观察守护进程的资源消耗比较稳定
+     
    2.在步骤1的基础上杀掉salt-minion进程，过一会salt-minion进程被守护进程启动起来，
      通过top命令观察守护进程的资源消耗比较稳定
+     
    3.在步骤1的基础上杀掉salt-minion进程，将虚拟机网卡设置为nat模式，使redhat5.8和master无法通讯，
      一段时间salt-minion会重启（通过ps -ef | grep "salt-minion"查看进程id是否与之前相同），通过top命令观察守护进程的资源消耗比较稳定。
    
 在windows2003上的测试步骤：
    1.master启动定时器执行write_alived，在master上手动运行run_monion_protecter.sh执行守护进程，
      通过资源管理器观察守护进程的资源消耗比较稳定。
+     
    2.在步骤1的基础上结束salt-minion服务，过一会salt-minion进程被守护进程启动起来，
      通过资源管理器观察守护进程的资源消耗比较稳定。
